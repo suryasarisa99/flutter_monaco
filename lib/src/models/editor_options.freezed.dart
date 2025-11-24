@@ -21,6 +21,7 @@ mixin _$EditorOptions {
   double get lineHeight;
   bool get wordWrap;
   bool get minimap;
+  bool get stickyScroll;
   bool get lineNumbers;
   List<int> get rulers;
   int get tabSize;
@@ -76,6 +77,8 @@ mixin _$EditorOptions {
             (identical(other.wordWrap, wordWrap) ||
                 other.wordWrap == wordWrap) &&
             (identical(other.minimap, minimap) || other.minimap == minimap) &&
+            (identical(other.stickyScroll, stickyScroll) ||
+                other.stickyScroll == stickyScroll) &&
             (identical(other.lineNumbers, lineNumbers) ||
                 other.lineNumbers == lineNumbers) &&
             const DeepCollectionEquality().equals(other.rulers, rulers) &&
@@ -146,6 +149,7 @@ mixin _$EditorOptions {
         lineHeight,
         wordWrap,
         minimap,
+        stickyScroll,
         lineNumbers,
         const DeepCollectionEquality().hash(rulers),
         tabSize,
@@ -179,7 +183,7 @@ mixin _$EditorOptions {
 
   @override
   String toString() {
-    return 'EditorOptions(language: $language, theme: $theme, fontSize: $fontSize, fontFamily: $fontFamily, lineHeight: $lineHeight, wordWrap: $wordWrap, minimap: $minimap, lineNumbers: $lineNumbers, rulers: $rulers, tabSize: $tabSize, insertSpaces: $insertSpaces, readOnly: $readOnly, automaticLayout: $automaticLayout, padding: $padding, scrollBeyondLastLine: $scrollBeyondLastLine, smoothScrolling: $smoothScrolling, cursorBlinking: $cursorBlinking, cursorStyle: $cursorStyle, renderWhitespace: $renderWhitespace, bracketPairColorization: $bracketPairColorization, autoClosingBrackets: $autoClosingBrackets, autoClosingQuotes: $autoClosingQuotes, formatOnPaste: $formatOnPaste, formatOnType: $formatOnType, quickSuggestions: $quickSuggestions, fontLigatures: $fontLigatures, parameterHints: $parameterHints, hover: $hover, contextMenu: $contextMenu, mouseWheelZoom: $mouseWheelZoom, roundedSelection: $roundedSelection, selectionHighlight: $selectionHighlight, overviewRulerBorder: $overviewRulerBorder, renderControlCharacters: $renderControlCharacters, disableLayerHinting: $disableLayerHinting, disableMonospaceOptimizations: $disableMonospaceOptimizations)';
+    return 'EditorOptions(language: $language, theme: $theme, fontSize: $fontSize, fontFamily: $fontFamily, lineHeight: $lineHeight, wordWrap: $wordWrap, minimap: $minimap, stickyScroll: $stickyScroll, lineNumbers: $lineNumbers, rulers: $rulers, tabSize: $tabSize, insertSpaces: $insertSpaces, readOnly: $readOnly, automaticLayout: $automaticLayout, padding: $padding, scrollBeyondLastLine: $scrollBeyondLastLine, smoothScrolling: $smoothScrolling, cursorBlinking: $cursorBlinking, cursorStyle: $cursorStyle, renderWhitespace: $renderWhitespace, bracketPairColorization: $bracketPairColorization, autoClosingBrackets: $autoClosingBrackets, autoClosingQuotes: $autoClosingQuotes, formatOnPaste: $formatOnPaste, formatOnType: $formatOnType, quickSuggestions: $quickSuggestions, fontLigatures: $fontLigatures, parameterHints: $parameterHints, hover: $hover, contextMenu: $contextMenu, mouseWheelZoom: $mouseWheelZoom, roundedSelection: $roundedSelection, selectionHighlight: $selectionHighlight, overviewRulerBorder: $overviewRulerBorder, renderControlCharacters: $renderControlCharacters, disableLayerHinting: $disableLayerHinting, disableMonospaceOptimizations: $disableMonospaceOptimizations)';
   }
 }
 
@@ -197,6 +201,7 @@ abstract mixin class $EditorOptionsCopyWith<$Res> {
       double lineHeight,
       bool wordWrap,
       bool minimap,
+      bool stickyScroll,
       bool lineNumbers,
       List<int> rulers,
       int tabSize,
@@ -248,6 +253,7 @@ class _$EditorOptionsCopyWithImpl<$Res>
     Object? lineHeight = null,
     Object? wordWrap = null,
     Object? minimap = null,
+    Object? stickyScroll = null,
     Object? lineNumbers = null,
     Object? rulers = null,
     Object? tabSize = null,
@@ -306,6 +312,10 @@ class _$EditorOptionsCopyWithImpl<$Res>
       minimap: null == minimap
           ? _self.minimap
           : minimap // ignore: cast_nullable_to_non_nullable
+              as bool,
+      stickyScroll: null == stickyScroll
+          ? _self.stickyScroll
+          : stickyScroll // ignore: cast_nullable_to_non_nullable
               as bool,
       lineNumbers: null == lineNumbers
           ? _self.lineNumbers
@@ -526,6 +536,7 @@ extension EditorOptionsPatterns on EditorOptions {
             double lineHeight,
             bool wordWrap,
             bool minimap,
+            bool stickyScroll,
             bool lineNumbers,
             List<int> rulers,
             int tabSize,
@@ -569,6 +580,7 @@ extension EditorOptionsPatterns on EditorOptions {
             _that.lineHeight,
             _that.wordWrap,
             _that.minimap,
+            _that.stickyScroll,
             _that.lineNumbers,
             _that.rulers,
             _that.tabSize,
@@ -626,6 +638,7 @@ extension EditorOptionsPatterns on EditorOptions {
             double lineHeight,
             bool wordWrap,
             bool minimap,
+            bool stickyScroll,
             bool lineNumbers,
             List<int> rulers,
             int tabSize,
@@ -668,6 +681,7 @@ extension EditorOptionsPatterns on EditorOptions {
             _that.lineHeight,
             _that.wordWrap,
             _that.minimap,
+            _that.stickyScroll,
             _that.lineNumbers,
             _that.rulers,
             _that.tabSize,
@@ -722,6 +736,7 @@ extension EditorOptionsPatterns on EditorOptions {
             double lineHeight,
             bool wordWrap,
             bool minimap,
+            bool stickyScroll,
             bool lineNumbers,
             List<int> rulers,
             int tabSize,
@@ -764,6 +779,7 @@ extension EditorOptionsPatterns on EditorOptions {
             _that.lineHeight,
             _that.wordWrap,
             _that.minimap,
+            _that.stickyScroll,
             _that.lineNumbers,
             _that.rulers,
             _that.tabSize,
@@ -810,6 +826,7 @@ class _EditorOptions extends EditorOptions {
       this.lineHeight = 1.4,
       this.wordWrap = true,
       this.minimap = false,
+      this.stickyScroll = false,
       this.lineNumbers = true,
       final List<int> rulers = const [],
       this.tabSize = 4,
@@ -864,6 +881,9 @@ class _EditorOptions extends EditorOptions {
   @override
   @JsonKey()
   final bool minimap;
+  @override
+  @JsonKey()
+  final bool stickyScroll;
   @override
   @JsonKey()
   final bool lineNumbers;
@@ -990,6 +1010,8 @@ class _EditorOptions extends EditorOptions {
             (identical(other.wordWrap, wordWrap) ||
                 other.wordWrap == wordWrap) &&
             (identical(other.minimap, minimap) || other.minimap == minimap) &&
+            (identical(other.stickyScroll, stickyScroll) ||
+                other.stickyScroll == stickyScroll) &&
             (identical(other.lineNumbers, lineNumbers) ||
                 other.lineNumbers == lineNumbers) &&
             const DeepCollectionEquality().equals(other._rulers, _rulers) &&
@@ -1060,6 +1082,7 @@ class _EditorOptions extends EditorOptions {
         lineHeight,
         wordWrap,
         minimap,
+        stickyScroll,
         lineNumbers,
         const DeepCollectionEquality().hash(_rulers),
         tabSize,
@@ -1093,7 +1116,7 @@ class _EditorOptions extends EditorOptions {
 
   @override
   String toString() {
-    return 'EditorOptions(language: $language, theme: $theme, fontSize: $fontSize, fontFamily: $fontFamily, lineHeight: $lineHeight, wordWrap: $wordWrap, minimap: $minimap, lineNumbers: $lineNumbers, rulers: $rulers, tabSize: $tabSize, insertSpaces: $insertSpaces, readOnly: $readOnly, automaticLayout: $automaticLayout, padding: $padding, scrollBeyondLastLine: $scrollBeyondLastLine, smoothScrolling: $smoothScrolling, cursorBlinking: $cursorBlinking, cursorStyle: $cursorStyle, renderWhitespace: $renderWhitespace, bracketPairColorization: $bracketPairColorization, autoClosingBrackets: $autoClosingBrackets, autoClosingQuotes: $autoClosingQuotes, formatOnPaste: $formatOnPaste, formatOnType: $formatOnType, quickSuggestions: $quickSuggestions, fontLigatures: $fontLigatures, parameterHints: $parameterHints, hover: $hover, contextMenu: $contextMenu, mouseWheelZoom: $mouseWheelZoom, roundedSelection: $roundedSelection, selectionHighlight: $selectionHighlight, overviewRulerBorder: $overviewRulerBorder, renderControlCharacters: $renderControlCharacters, disableLayerHinting: $disableLayerHinting, disableMonospaceOptimizations: $disableMonospaceOptimizations)';
+    return 'EditorOptions(language: $language, theme: $theme, fontSize: $fontSize, fontFamily: $fontFamily, lineHeight: $lineHeight, wordWrap: $wordWrap, minimap: $minimap, stickyScroll: $stickyScroll, lineNumbers: $lineNumbers, rulers: $rulers, tabSize: $tabSize, insertSpaces: $insertSpaces, readOnly: $readOnly, automaticLayout: $automaticLayout, padding: $padding, scrollBeyondLastLine: $scrollBeyondLastLine, smoothScrolling: $smoothScrolling, cursorBlinking: $cursorBlinking, cursorStyle: $cursorStyle, renderWhitespace: $renderWhitespace, bracketPairColorization: $bracketPairColorization, autoClosingBrackets: $autoClosingBrackets, autoClosingQuotes: $autoClosingQuotes, formatOnPaste: $formatOnPaste, formatOnType: $formatOnType, quickSuggestions: $quickSuggestions, fontLigatures: $fontLigatures, parameterHints: $parameterHints, hover: $hover, contextMenu: $contextMenu, mouseWheelZoom: $mouseWheelZoom, roundedSelection: $roundedSelection, selectionHighlight: $selectionHighlight, overviewRulerBorder: $overviewRulerBorder, renderControlCharacters: $renderControlCharacters, disableLayerHinting: $disableLayerHinting, disableMonospaceOptimizations: $disableMonospaceOptimizations)';
   }
 }
 
@@ -1113,6 +1136,7 @@ abstract mixin class _$EditorOptionsCopyWith<$Res>
       double lineHeight,
       bool wordWrap,
       bool minimap,
+      bool stickyScroll,
       bool lineNumbers,
       List<int> rulers,
       int tabSize,
@@ -1164,6 +1188,7 @@ class __$EditorOptionsCopyWithImpl<$Res>
     Object? lineHeight = null,
     Object? wordWrap = null,
     Object? minimap = null,
+    Object? stickyScroll = null,
     Object? lineNumbers = null,
     Object? rulers = null,
     Object? tabSize = null,
@@ -1222,6 +1247,10 @@ class __$EditorOptionsCopyWithImpl<$Res>
       minimap: null == minimap
           ? _self.minimap
           : minimap // ignore: cast_nullable_to_non_nullable
+              as bool,
+      stickyScroll: null == stickyScroll
+          ? _self.stickyScroll
+          : stickyScroll // ignore: cast_nullable_to_non_nullable
               as bool,
       lineNumbers: null == lineNumbers
           ? _self.lineNumbers
