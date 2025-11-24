@@ -119,6 +119,12 @@ class _MonacoExamplePageState extends State<MonacoExamplePage> {
         _controller = controller;
         _isLoading = false;
       });
+      controller.registerCommand(
+        keybinding: "monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS",
+        callback: () async {
+          debugPrint("Custom command executed");
+        },
+      );
     } catch (e) {
       debugPrint('Error initializing Monaco: $e');
       setState(() {

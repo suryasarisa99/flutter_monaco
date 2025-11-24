@@ -430,6 +430,43 @@ class MonacoController {
   /// Paste from clipboard
   Future<void> paste() => executeAction('editor.action.clipboardPasteAction');
 
+  /// Register a keyboard shortcut or action in the Monaco editor
+  Future<void> registerCommand({
+    String? commandId,
+    required String keybinding,
+    required Future<void> Function() callback,
+  }) async {
+    await _ensureReady();
+
+    // Auto-generate a commandId if not provided
+    final generatedCommandId =
+        commandId ?? 'cmd_${DateTime.now().millisecondsSinceEpoch}';
+
+    // Register the command in the JavaScript side
+    await _webViewController.runJavaScript('''
+      if (window.editor) {
+        const keybinding = $keybinding;
+        window.editor.addCommand(
+          keybinding,
+          () => {
+            window.flutterChannel.postMessage(JSON.stringify({
+              event: 'commandExecuted',
+              commandId: ${jsonEncode(generatedCommandId)}
+            }));
+          }
+        );
+      }
+    ''');
+
+    // Listen for the command execution event
+    _bridge.addRawListener((Map<String, dynamic> json) {
+      if (json['event'] == 'commandExecuted' &&
+          json['commandId'] == generatedCommandId) {
+        callback();
+      }
+    });
+  }
+
   // --- EVENT HANDLING ---
 
   /// Wire up event listeners with improved conversion
